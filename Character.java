@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 class Character implements ActionListener {
-	public int x, y, attack, back, block, forward, points=2147483647;
+	public int x, y, attack, back, block, forward, points;
 	public HashMap<String, Image> images;
 	public Image img;
 	Timer attackTimer;

@@ -91,25 +91,25 @@ public class Staket extends JPanel implements ActionListener {
 		char1Images = new HashMap<String, Image>();
 		char2Images = new HashMap<String, Image>();
 
-		char1Images.put("idle", new ImageIcon("/home/_/staket/Idle.png").getImage());
-		char2Images.put("idle", new ImageIcon("/home/_/staket/Idle2.png").getImage());
+		char1Images.put("idle", new ImageIcon("/home/_/staket/images/Idle.png").getImage());
+		char2Images.put("idle", new ImageIcon("/home/_/staket/images/Idle2.png").getImage());
 
-		char1Images.put("thrust", new ImageIcon("/home/_/staket/Thrust.png").getImage());
-		char2Images.put("thrust", new ImageIcon("/home/_/staket/Thrust2.png").getImage());
+		char1Images.put("thrust", new ImageIcon("/home/_/staket/images/Thrust.png").getImage());
+		char2Images.put("thrust", new ImageIcon("/home/_/staket/images/Thrust2.png").getImage());
 
-		char1Images.put("attack", new ImageIcon("/home/_/staket/Attack.png").getImage());
-		char2Images.put("attack", new ImageIcon("/home/_/staket/Attack2.png").getImage());
+		char1Images.put("attack", new ImageIcon("/home/_/staket/images/Attack.png").getImage());
+		char2Images.put("attack", new ImageIcon("/home/_/staket/images/Attack2.png").getImage());
 
-		char1Images.put("block", new ImageIcon("/home/_/staket/Block.png").getImage());
-		char2Images.put("block", new ImageIcon("/home/_/staket/Block2.png").getImage());
+		char1Images.put("block", new ImageIcon("/home/_/staket/images/Block.png").getImage());
+		char2Images.put("block", new ImageIcon("/home/_/staket/images/Block2.png").getImage());
 
-		char1Images.put("moveback", new ImageIcon("/home/_/staket/BackMove.png").getImage());
-		char2Images.put("moveback", new ImageIcon("/home/_/staket/BackMove2.png").getImage());
+		char1Images.put("moveback", new ImageIcon("/home/_/staket/images/BackMove.png").getImage());
+		char2Images.put("moveback", new ImageIcon("/home/_/staket/images/BackMove2.png").getImage());
 
-		char1Images.put("moveforward", new ImageIcon("/home/_/staket/FrontMove.png").getImage());
-		char2Images.put("moveforward", new ImageIcon("/home/_/staket/FrontMove2.png").getImage());
+		char1Images.put("moveforward", new ImageIcon("/home/_/staket/images/FrontMove.png").getImage());
+		char2Images.put("moveforward", new ImageIcon("/home/_/staket/images/FrontMove2.png").getImage());
 
-		bg = new ImageIcon("/home/_/staket/bg.png").getImage();
+		bg = new ImageIcon("/home/_/staket/images/bg.png").getImage();
 	}
 
 	// Main runs the game.
