@@ -4,8 +4,7 @@ import javax.swing.*;
 
 public class KeyInputHandler extends KeyAdapter {
 	DisplayMode dm;
-	Character char1;
-	Character char2;
+	Character char1, char2;
 	Staket s;
 
 	// KeyInputHandler initializes the KeyInputHandler.
@@ -35,11 +34,34 @@ public class KeyInputHandler extends KeyAdapter {
 	    	if (c.isAttacking) {
 	    		c.img = c.images.get("attack");
 	    		c.isAttacking = false;
-	    		attack(c);
+	    		attack();
 	    	} else {
 		    	c.img = c.images.get("idle");
 		    }
 	    }
+
+    	public void attack() {
+    		int dist = Math.abs(char1.x - char2.x);
+
+    		// if distance is img width or less it's a hit.
+    		// and if no character is blocking, the attack was successful.
+    		if (dist <= c.img.getWidth(null)/4 && !char1.isBlocking() && !char2.isBlocking()) {
+    		    // give the winning fencer a point.
+    		    c.points++;
+
+    		    // We need to force a repaint before the sleep. Otherwise the attack
+    		    // animation won't be visible.
+    		    s.redraw();
+
+    			// Wait a half second to give the users a feedback on what happened.
+        		try {
+    	    		Thread.sleep(500);
+    		    } catch (Exception a) {}
+
+    		    stopTimers();
+    		    s.positionChallengers();
+    		}
+    	}
 	}
 
 	private class BlockListener implements ActionListener {
@@ -63,6 +85,16 @@ public class KeyInputHandler extends KeyAdapter {
 		}
 	}
 
+	// keyPressed is triggered when a key is pressed.
+	public void keyPressed(KeyEvent e) {
+		// if we hit escape, then quit the game
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
+		}
+		charActions(e.getKeyCode(), char1);
+		charActions(e.getKeyCode(), char2);
+	}
+
 	// charActions checks if a character designated key was the key pressed.
 	public void charActions(int keyCode, Character c) {
 		if (keyCode == c.back) {
@@ -74,18 +106,6 @@ public class KeyInputHandler extends KeyAdapter {
 		} else if (keyCode == c.block) {
 			c.blockAnim();
 		}
-	}
-
-	public void moveForward(Character c) {
-		c.stopAnimations();
-
-		if (c.equals(char1)) {
-			c.moveRight(dm);
-		} else if (c.equals(char2)) {
-			c.moveLeft(dm);
-		}
-		c.img = c.images.get("moveforward");
-		c.moveTimer.restart();
 	}
 
 	public void moveBack(Character c) {
@@ -100,37 +120,16 @@ public class KeyInputHandler extends KeyAdapter {
 		c.moveTimer.restart();
 	}
 
-	public void attack(Character c) {
-		int dist = Math.abs(char1.x - char2.x);
+	public void moveForward(Character c) {
+		c.stopAnimations();
 
-		// if distance is img width or less it's a hit.
-		// and if no character is blocking, the attack was successful.
-		if (dist <= c.img.getWidth(null)/4 && !char1.isBlocking() && !char2.isBlocking()) {
-		    // give the winning fencer a point.
-		    c.points++;
-
-		    // We need to force a repaint before the sleep. Otherwise the attack
-		    // animation won't be visible.
-		    s.redraw();
-
-			// Wait a half second to give the users a feedback on what happened.
-    		try {
-	    		Thread.sleep(500);
-		    } catch (Exception a) {}
-
-		    stopTimers();
-		    s.positionChallengers();
+		if (c.equals(char1)) {
+			c.moveRight(dm);
+		} else if (c.equals(char2)) {
+			c.moveLeft(dm);
 		}
-	}
-
-	// keyPressed is triggered when a key is pressed.
-	public void keyPressed(KeyEvent e) {
-		// if we hit escape, then quit the game
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			System.exit(0);
-		}
-		charActions(e.getKeyCode(), char1);
-		charActions(e.getKeyCode(), char2);
+		c.img = c.images.get("moveforward");
+		c.moveTimer.restart();
 	}
 
 	// stopTimers stop both the characters animation timers.

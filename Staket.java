@@ -23,16 +23,11 @@ public class Staket extends JPanel {
 	public Character char1, char2;
 
 	// timer handles graphic redrawing.
-	public Timer timer = new Timer(20, new Redrawer(this));
-	private class Redrawer implements ActionListener {
-		Staket s;
-		Redrawer(Staket s) {
-			this.s = s;
-		}
+	public Timer timer = new Timer(20, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-	    	s.repaint();
-		}
-	}
+	        repaint();
+	    }
+	});
 
 	public void redraw() {
 		Graphics g = getGraphics();

@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.awt.event.*;
 import javax.swing.*;
 
-
 class Character {
 	// x, y is the character's current coordinate on the screen.
 	//
