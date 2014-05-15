@@ -32,7 +32,7 @@ player 2:
 installation
 ------------
 
-```shell
+```bash
 git clone git@github.com:karlek/staket.git
 cd staket
 javac Staket.java
