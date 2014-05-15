@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.*;
 import java.util.HashMap;
 import java.awt.event.*;
 import javax.swing.*;
@@ -13,8 +14,7 @@ public class Staket extends JPanel implements ActionListener {
 	// HashMap of the animations for the characters.
 	public HashMap<String, Image> char1Images, char2Images;
 
-	// 1720
-	public int char1X = 100, char1Y = 550, char2Y = 550, char2X = 600;
+	public int char1X = 400, char1Y = 550, char2Y = 550, char2X = 1120;
 
  	// ki handles key inputs.
 	public KeyInputHandler ki;
@@ -29,20 +29,18 @@ public class Staket extends JPanel implements ActionListener {
 	    this.repaint();
 	}
 
+	public void paintFonts(Graphics g) {
+
+	}
+
 	public void paintComponent(Graphics g){
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-		  RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g2.setRenderingHint(RenderingHints.KEY_RENDERING,
-		  RenderingHints.VALUE_RENDER_QUALITY);
-		super.paintComponent(g2);
-		super.paintComponent(g);
+		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
 		g.drawImage(bg, 0, 0, null);
 		g.drawImage(char1.img, char1.x, char1.y, null);
 		g.drawImage(char2.img, char2.x, char2.y, null);
-		// g.drawString(char1.points+"", 200, 200);
-		g.drawString(char2.points+"", 400, 200);
+		g.drawString(char1.points+"", 100, 200);
+		g.drawString(char2.points+"", 1720, 200);
 	}
 
 	public void run(DisplayMode dm) {
@@ -76,6 +74,7 @@ public class Staket extends JPanel implements ActionListener {
 		);
 
 		setForeground(Color.BLACK);
+		setBackground(Color.BLACK);
 		setFont(new Font("Serif", Font.PLAIN, 140));
 
 		JFrame f = new JFrame();
@@ -114,6 +113,6 @@ public class Staket extends JPanel implements ActionListener {
 
 	// Main runs the game.
 	public static void main(String [] args) {
-		(new Staket()).run(new DisplayMode(1600, 900, 32, DisplayMode.REFRESH_RATE_UNKNOWN));
+		(new Staket()).run(new DisplayMode(1920, 1080, 32, DisplayMode.REFRESH_RATE_UNKNOWN));
 	}
 }

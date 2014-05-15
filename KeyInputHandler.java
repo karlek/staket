@@ -16,11 +16,15 @@ public class KeyInputHandler extends KeyAdapter {
 		this.char1 = char1;
 		this.char2 = char2;
 		this.s = s;
+
 		char1.attackTimer = new Timer(200, new AttackListener(char1));
 		char2.attackTimer = new Timer(200, new AttackListener(char2));
 
 		char1.blockTimer = new Timer(500, new BlockListener(char1));
 		char2.blockTimer = new Timer(500, new BlockListener(char2));
+
+		char1.moveTimer = new Timer(50, new MoveListener(char1));
+		char2.moveTimer = new Timer(50, new MoveListener(char2));
 	}
 
 	private class AttackListener implements ActionListener {
@@ -47,7 +51,18 @@ public class KeyInputHandler extends KeyAdapter {
 		}
 	    public void actionPerformed(ActionEvent e) {
 	    	c.img = c.images.get("idle");
+			c.blockTimer.stop();
 	    }
+	}
+
+	private class MoveListener implements ActionListener {
+		Character c;
+		MoveListener(Character c) {
+			this.c = c;
+		}
+		public void actionPerformed(ActionEvent e) {
+			c.img = c.images.get("idle");
+		}
 	}
 
 	// charActions checks if a character designated key was the key pressed.
@@ -130,7 +145,10 @@ public class KeyInputHandler extends KeyAdapter {
 			if (!char1.blockTimer.isRunning() && !char2.blockTimer.isRunning()) {
 			    c.points++;
 				Graphics g = s.getGraphics();
-				if (g != null) s.paintComponent(g);
+				if (g != null) {
+					s.paintFonts(g);
+					s.paintComponent(g);
+				}
 				else s.repaint();
 
 	    		try {
@@ -138,8 +156,8 @@ public class KeyInputHandler extends KeyAdapter {
 			    } catch (Exception a) {
 
 			    }
-			    char1.x = 100;
-			    char2.x = 600;
+			    char1.x = s.char1X;
+			    char2.x = s.char2X;
 
 			    char1.attackTimer.stop();
 			    char1.blockTimer.stop();

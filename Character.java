@@ -3,13 +3,26 @@ import java.util.HashMap;
 import java.awt.event.*;
 import javax.swing.*;
 
-class Character implements ActionListener {
-	public int x, y, attack, back, block, forward, points;
+class Character {
+	// x, y is the character's current coordinate on the screen.
+	//
+	// attack, block back and forward are the assigned keyboard buttons for that
+	// character
+	// Points is self explanatory.
+	public int x, y, attack, block, back, forward, points;
+
+	// images is a collection of the different animations the character can
+	// take. Attack, block, move forward, move backword and idle.
 	public HashMap<String, Image> images;
+
+	// img is the current image the character is displaying on screen.
 	public Image img;
+
+	//
 	Timer attackTimer;
 	Timer blockTimer;
-	Timer moveTimer = new Timer(50, this);
+	Timer moveTimer;
+
 	boolean isAttacking;
 
 	public Character(int x, int y, HashMap<String, Image> images, int attack, int back, int block, int forward) {
@@ -21,9 +34,5 @@ class Character implements ActionListener {
 		this.forward = forward;
 		this.images = images;
 		this.img = this.images.get("idle");
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		this.img = images.get("idle");
 	}
 }
