@@ -1,69 +1,87 @@
 "Programdesign. Beskriv de grundläggande klasserna som ni avser att implementera
 och ge en beskrivning av de viktigaste metoderna i varje klass."
 
-	Staket
+Staket
+======
 
-	Staket är själva spelklassen där mycket gemensam data finns samlad.
-	Spelkaraktärerna, deras startkoordinater till exempel.
+Staket är själva spelklassen där mycket gemensam data finns samlad.
+Spelkaraktärerna, deras startkoordinater till exempel.
 
-		redraw
-			Forcera en omritning av skärmen.
+redraw
+------
+	Forcera en omritning av skärmen.
 
-		paintComponent
-			Override funktion som ritar objekt till skärmen.
+paintComponent
+--------------
+	Override funktion som ritar objekt till skärmen.
 
-		positionChallengers
-			Förflyttar karaktärerna till deras start positioner.
+positionChallengers
+-------------------
+	Förflyttar karaktärerna till deras start positioner.
 
-		loadPics
-			Ladda in karaktärernas animationer och bakgrunden.
+loadPics
+--------
+	Ladda in karaktärernas animationer och bakgrunden.
 
-		run
-			Huvudmetoden som sedan startar skärmen.
+run
+---
+	Huvudmetoden som sedan startar skärmen.
 
-	Character
+Character
+=========
 
-	Character hanterar allt om enstaka karaktärer och deras placering. 
+Character hanterar allt om enstaka karaktärer och deras placering. 
 
-		isBlocking
-			Håller den här karaktären för nuvarande på att avvärja attacker?
+isBlocking
+----------
+	Håller den här karaktären för nuvarande på att avvärja attacker?
 
-		attackAnim, blockAnim
-			Spela upp attack / blockerings animationen.
+attackAnim, blockAnim
+---------------------
+	Spela upp attack / blockerings animationen.
+
+moveRight, moveLeft
+-------------------
+	Förflytta karaktären.
 		
-		moveRight, moveLeft
-			Förflytta karaktären.
-				
-		stopAnimations
-			Stoppa alla animationer.
+stopAnimations
+--------------
+	Stoppa alla animationer.
 
-	KeyInputHandler
+KeyInputHandler
+===============
 
-	KeyInputHandler hanterar alla knapptryckningar och logiken som inträffar vid
-	sagd knapptryckning. Attack, blockering och förflyttningar lyssnas efter
-	här.
+KeyInputHandler hanterar alla knapptryckningar och logiken som inträffar vid
+sagd knapptryckning. Attack, blockering och förflyttningar lyssnas efter
+här.
 
-		charActions
-			Tar reda på vilken spelare som tryckte på knappen för att
-			sedan utföra kommandot. En convenience function som generaliserar
-			koden för de båda spelarna.
+charActions
+-----------
+	Tar reda på vilken spelare som tryckte på knappen för att
+	sedan utföra kommandot. En convenience function som generaliserar
+	koden för de båda spelarna.
 
-		keyPressed
-			Override function son krävs för att hooka på knapptryckningar.
+keyPressed
+----------
+	Override function son krävs för att hooka på knapptryckningar.
 
-		moveBack, moveForward
-			Convenience functions för att flytta spelarna bakåt respektive
-			framåt (vilket är motsatt för varandra eftersom de står ansikte mot
-			ansikte).
+moveBack, moveForward
+---------------------
+	Convenience functions för att flytta spelarna bakåt respektive
+	framåt (vilket är motsatt för varandra eftersom de står ansikte mot
+	ansikte).
 
-		stopTimers
-			Stanna båda fäktarnas animationer.
+stopTimers
+----------
+	Stanna båda fäktarnas animationer.
 
-	Screen
+Screen
+======
 
-	Screen möjligör fullskärmsrendrering.
+Screen möjligör fullskärmsrendrering.
 
-		setFullScreen
-			Självförklarande.
+setFullScreen
+-------------
+	Självförklarande.
 
 
