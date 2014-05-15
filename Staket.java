@@ -7,48 +7,75 @@ import javax.swing.*;
 // Implement movement block to not go past each other.
 
 // Staket
-public class Staket extends JPanel implements ActionListener {
+public class Staket extends JPanel {
 	// bg = background.
 	public Image bg;
 
 	// HashMap of the animations for the characters.
 	public HashMap<String, Image> char1Images, char2Images;
 
-	public int char1X = 400, char1Y = 550, char2Y = 550, char2X = 1120;
+	public int char1StartX = 400, char2StartX = 1120, charStartY = 700;
 
  	// ki handles key inputs.
 	public KeyInputHandler ki;
 
-	// char1 is the first character, char2 is the second
-	// character.
+	// char1 is the first character, char2 is the second character.
 	public Character char1, char2;
 
 	// timer handles graphic redrawing.
-	public Timer timer = new Timer(20, this);
-	public void actionPerformed(ActionEvent e) {
-	    this.repaint();
+	public Timer timer = new Timer(20, new Redrawer(this));
+	private class Redrawer implements ActionListener {
+		Staket s;
+		Redrawer(Staket s) {
+			this.s = s;
+		}
+		public void actionPerformed(ActionEvent e) {
+	    	s.repaint();
+		}
 	}
 
-	public void paintFonts(Graphics g) {
-
+	public void redraw() {
+		Graphics g = getGraphics();
+		if (g != null) {
+			paintComponent(g);
+		} else {
+			repaint();
+		}
 	}
 
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+
+		// Make text pretty.
 		((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
+		// Draw background.
 		g.drawImage(bg, 0, 0, null);
+
+		// Draw characters.
 		g.drawImage(char1.img, char1.x, char1.y, null);
 		g.drawImage(char2.img, char2.x, char2.y, null);
+
+		// Draw points.
 		g.drawString(char1.points+"", 100, 200);
 		g.drawString(char2.points+"", 1720, 200);
 	}
 
+	public void positionChallengers() {
+		char1.x = char1StartX;
+		char2.x = char2StartX;
+
+	    char1.img = char1.images.get("idle");
+	    char2.img = char2.images.get("idle");
+	}
+
+	// run is the games main loop.
 	public void run(DisplayMode dm) {
 		loadPics();
 
 		char1 = new Character(
-			char1X,
-			char1Y,
+			char1StartX,
+			charStartY,
 			char1Images,
 			KeyEvent.VK_W,
 			KeyEvent.VK_A,
@@ -57,8 +84,8 @@ public class Staket extends JPanel implements ActionListener {
 		);
 
 		char2 = new Character(
-			char2X,
-			char2Y,
+			char2StartX,
+			charStartY,
 			char2Images,
 			KeyEvent.VK_UP,
 			KeyEvent.VK_RIGHT,
@@ -74,7 +101,6 @@ public class Staket extends JPanel implements ActionListener {
 		);
 
 		setForeground(Color.BLACK);
-		setBackground(Color.BLACK);
 		setFont(new Font("Serif", Font.PLAIN, 140));
 
 		JFrame f = new JFrame();
