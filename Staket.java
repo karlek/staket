@@ -14,7 +14,7 @@ public class Staket extends JPanel {
 	// HashMap of the animations for the characters.
 	public HashMap<String, Image> char1Images, char2Images;
 
-	public int char1StartX = 400, char2StartX = 1120, charStartY = 700;
+	public int char1StartX, char2StartX, charStartY, points1X, pointsY, points2X;
 
  	// ki handles key inputs.
 	public KeyInputHandler ki;
@@ -52,8 +52,8 @@ public class Staket extends JPanel {
 		g.drawImage(char2.img, char2.x, char2.y, null);
 
 		// Draw points.
-		g.drawString(char1.points+"", 100, 200);
-		g.drawString(char2.points+"", 1720, 200);
+		g.drawString(char1.points+"", points1X, pointsY);
+		g.drawString(char2.points+"", points2X, pointsY);
 	}
 
 	public void positionChallengers() {
@@ -67,6 +67,14 @@ public class Staket extends JPanel {
 	// run is the games main loop.
 	public void run(DisplayMode dm) {
 		loadPics();
+
+		char1StartX = dm.getWidth()/4;
+		char2StartX = dm.getWidth()-dm.getWidth()/2;
+		charStartY = dm.getHeight()-dm.getHeight()/3;
+
+		points1X = dm.getWidth()/10;
+		points2X = dm.getWidth()-dm.getWidth()/5;
+		pointsY = dm.getHeight()/6;
 
 		char1 = new Character(
 			char1StartX,
@@ -111,29 +119,30 @@ public class Staket extends JPanel {
 		char1Images = new HashMap<String, Image>();
 		char2Images = new HashMap<String, Image>();
 
-		char1Images.put("idle", new ImageIcon("/home/_/staket/images/Idle.png").getImage());
-		char2Images.put("idle", new ImageIcon("/home/_/staket/images/Idle2.png").getImage());
+		char1Images.put("idle", new ImageIcon("images/Idle.png").getImage());
+		char2Images.put("idle", new ImageIcon("images/Idle2.png").getImage());
 
-		char1Images.put("thrust", new ImageIcon("/home/_/staket/images/Thrust.png").getImage());
-		char2Images.put("thrust", new ImageIcon("/home/_/staket/images/Thrust2.png").getImage());
+		char1Images.put("thrust", new ImageIcon("images/Thrust.png").getImage());
+		char2Images.put("thrust", new ImageIcon("images/Thrust2.png").getImage());
 
-		char1Images.put("attack", new ImageIcon("/home/_/staket/images/Attack.png").getImage());
-		char2Images.put("attack", new ImageIcon("/home/_/staket/images/Attack2.png").getImage());
+		char1Images.put("attack", new ImageIcon("images/Attack.png").getImage());
+		char2Images.put("attack", new ImageIcon("images/Attack2.png").getImage());
 
-		char1Images.put("block", new ImageIcon("/home/_/staket/images/Block.png").getImage());
-		char2Images.put("block", new ImageIcon("/home/_/staket/images/Block2.png").getImage());
+		char1Images.put("block", new ImageIcon("images/Block.png").getImage());
+		char2Images.put("block", new ImageIcon("images/Block2.png").getImage());
 
-		char1Images.put("moveback", new ImageIcon("/home/_/staket/images/BackMove.png").getImage());
-		char2Images.put("moveback", new ImageIcon("/home/_/staket/images/BackMove2.png").getImage());
+		char1Images.put("moveback", new ImageIcon("images/BackMove.png").getImage());
+		char2Images.put("moveback", new ImageIcon("images/BackMove2.png").getImage());
 
-		char1Images.put("moveforward", new ImageIcon("/home/_/staket/images/FrontMove.png").getImage());
-		char2Images.put("moveforward", new ImageIcon("/home/_/staket/images/FrontMove2.png").getImage());
+		char1Images.put("moveforward", new ImageIcon("images/FrontMove.png").getImage());
+		char2Images.put("moveforward", new ImageIcon("images/FrontMove2.png").getImage());
 
-		bg = new ImageIcon("/home/_/staket/images/bg.png").getImage();
+		bg = new ImageIcon("images/bg.png").getImage();
 	}
 
 	// Main runs the game.
 	public static void main(String [] args) {
-		(new Staket()).run(new DisplayMode(1920, 1080, 32, DisplayMode.REFRESH_RATE_UNKNOWN));
+		Dimension dim = (Toolkit.getDefaultToolkit()).getScreenSize();
+		(new Staket()).run(new DisplayMode(dim.width, dim.height, 32, DisplayMode.REFRESH_RATE_UNKNOWN));
 	}
 }
